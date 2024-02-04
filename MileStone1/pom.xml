@@ -22,4 +22,27 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-maven-plugin</artifactId>
+                <version>4.7.2</version>
+                <executions>
+                    <execution>
+                        <id>antlr</id>
+                        <goals>
+                            <goal>antlr4</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sourceDirectory>${basedir}/src/main/resources/antlr4</sourceDirectory>
+                    <outputDirectory>src/main/java/com/github/cse232b/parsers</outputDirectory>
+                    <visitor>true</visitor>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
