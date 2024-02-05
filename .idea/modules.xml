@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MileStone1/MileStone1.iml" filepath="$PROJECT_DIR$/MileStone1/MileStone1.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/XQueryProcessor.iml" filepath="$PROJECT_DIR$/.idea/XQueryProcessor.iml" />
     </modules>
   </component>
