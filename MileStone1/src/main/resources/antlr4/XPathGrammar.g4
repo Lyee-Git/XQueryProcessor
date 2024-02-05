@@ -1,33 +1,33 @@
 grammar XPathGrammar;
 
 ap
-	: doc '/' rp
-	| doc '//' rp
+	: doc '/' rp #SlashAp
+	| doc '//' rp #DslashAp
 	;
 
 rp
-    	: Name
-    	| '*'
-   	    | '.'
-    	| '..'
-    	| 'text()'
-    	| '@' Name
-    	| '(' rp ')'
-    	| rp '/' rp
-    	| rp '//' rp
-    	| rp '[' f ']'
-    	| rp ',' rp
+    	: Name #SingleTagRp
+    	| '*' #SingleStarRp
+   	    | '.' #SingleSelfRp
+    	| '..' #SingleParentRp
+    	| 'text()' #SingleTextRp
+    	| '@' Name #SingleAttrRp
+    	| '(' rp ')' #SingleParenthRp
+    	| rp '/' rp #BinarySlashRp
+    	| rp '//' rp #BinaryDslashRp
+    	| rp ',' rp # BinaryRp
+    	| rp '[' f ']'#FilterRp
     	;
 
 f
-	    : rp
-	    | rp ('=' | 'eq') rp
-	    | rp ('==' | 'is') rp
-	    | rp ('=' | 'eq') String
-        | '(' f ')'
-	    | f 'and' f
-	    | f 'or' f
-	    | 'not' f
+	    : rp #RpF
+	    | rp ('=' | 'eq') rp # BinaryEqualRpF
+	    | rp ('==' | 'is') rp # BinaryIsRpF
+	    | rp ('=' | 'eq') String # RpEqualStringF
+        | '(' f ')' #ParenthF
+	    | f 'and' f #BinaryAndF
+	    | f 'or' f #BinaryOrF
+	    | 'not' f #NegF
         ;
 
 doc

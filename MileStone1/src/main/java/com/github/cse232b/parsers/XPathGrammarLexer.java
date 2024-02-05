@@ -1,12 +1,13 @@
 // Generated from D:/qq/1359641035/FileRecv/Winter 2024/CSE 232B/XQueryProcessor/MileStone1/src/main/resources/antlr4/XPathGrammar.g4 by ANTLR 4.13.1
 package com.github.cse232b.parsers;
-
+import org.antlr.v4.runtime.Lexer;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.atn.ATN;
-import org.antlr.v4.runtime.atn.ATNDeserializer;
-import org.antlr.v4.runtime.atn.LexerATNSimulator;
-import org.antlr.v4.runtime.atn.PredictionContextCache;
+import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue", "this-escape"})
 public class XPathGrammarLexer extends Lexer {
@@ -39,7 +40,7 @@ public class XPathGrammarLexer extends Lexer {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'/'", "'//'", "'*'", "'.'", "'..'", "'text()'", "'@'", "'('", 
-			"')'", "'['", "']'", "','", "'='", "'eq'", "'=='", "'is'", "'and'", "'or'", 
+			"')'", "','", "'['", "']'", "'='", "'eq'", "'=='", "'is'", "'and'", "'or'", 
 			"'not'", "'doc'"
 		};
 	}
@@ -163,8 +164,8 @@ public class XPathGrammarLexer extends Lexer {
 		"\u0000@A\u0005)\u0000\u0000A\f\u0001\u0000\u0000\u0000BC\u0005@\u0000"+
 		"\u0000C\u000e\u0001\u0000\u0000\u0000DE\u0005(\u0000\u0000E\u0010\u0001"+
 		"\u0000\u0000\u0000FG\u0005)\u0000\u0000G\u0012\u0001\u0000\u0000\u0000"+
-		"HI\u0005[\u0000\u0000I\u0014\u0001\u0000\u0000\u0000JK\u0005]\u0000\u0000"+
-		"K\u0016\u0001\u0000\u0000\u0000LM\u0005,\u0000\u0000M\u0018\u0001\u0000"+
+		"HI\u0005,\u0000\u0000I\u0014\u0001\u0000\u0000\u0000JK\u0005[\u0000\u0000"+
+		"K\u0016\u0001\u0000\u0000\u0000LM\u0005]\u0000\u0000M\u0018\u0001\u0000"+
 		"\u0000\u0000NO\u0005=\u0000\u0000O\u001a\u0001\u0000\u0000\u0000PQ\u0005"+
 		"e\u0000\u0000QR\u0005q\u0000\u0000R\u001c\u0001\u0000\u0000\u0000ST\u0005"+
 		"=\u0000\u0000TU\u0005=\u0000\u0000U\u001e\u0001\u0000\u0000\u0000VW\u0005"+
