@@ -1,16 +1,21 @@
 package com.github.cse232b.xpath;
 
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.github.cse232b.parsers.XPathGrammarLexer;
 import com.github.cse232b.parsers.XPathGrammarParser;
-import com.github.cse232b.subexpr.ApPath;
 import com.github.cse232b.subexpr.SubExpression;
+import com.github.cse232b.subexpr.ApPath;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.w3c.dom.Text;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.Text;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -19,10 +24,6 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class XPathProcessor {
@@ -36,7 +37,7 @@ public class XPathProcessor {
     }
 
     // Evaluates an XPath expression and returns the resulting nodes.
-    public List<Node> eval(String path) throws Exception {
+    public List<Node> evaluate(String path) throws Exception {
         // Lexer and parser setup
         XPathGrammarLexer lexer = new XPathGrammarLexer(CharStreams.fromString(path));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
