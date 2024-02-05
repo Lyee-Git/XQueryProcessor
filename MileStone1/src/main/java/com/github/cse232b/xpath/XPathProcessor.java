@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.github.cse232b.parsers.XPathGrammarLexer;
 import com.github.cse232b.parsers.XPathGrammarParser;
+import com.github.cse232b.subexpr.ApPath;
 import com.github.cse232b.subexpr.SubExpression;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -48,7 +49,7 @@ public class XPathProcessor {
         SubExpression rootExp = expBuild.visit(tree);
 
         // Load document
-        AbsolutePath apExp = (AbsolutePath) rootExp;
+        ApPath apExp = (ApPath) rootExp;
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream is = classloader.getResourceAsStream(apExp.getDoc());
         Document doc = docBuilder.parse(is);
@@ -56,7 +57,7 @@ public class XPathProcessor {
         // Evaluate expression
         List<Node> inputNodes = new ArrayList<>();
         inputNodes.add(doc);
-        return apExp.evaluate(inputNodes);
+        return apExp.eval(inputNodes);
     }
 
     // Transforms a list of nodes to a human-readable format
