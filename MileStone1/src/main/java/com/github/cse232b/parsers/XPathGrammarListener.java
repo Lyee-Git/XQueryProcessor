@@ -1,6 +1,6 @@
 // Generated from D:/qq/1359641035/FileRecv/Winter 2024/CSE 232B/XQueryProcessor/MileStone1/src/main/resources/antlr4/XPathGrammar.g4 by ANTLR 4.13.1
 package com.github.cse232b.parsers;
-
+import antlr4.XPathGrammarParser;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -45,6 +45,18 @@ public interface XPathGrammarListener extends ParseTreeListener {
 	 */
 	void exitSingleParentRp(XPathGrammarParser.SingleParentRpContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code BinaryCombineRp}
+	 * labeled alternative in {@link XPathGrammarParser#rp}.
+	 * @param ctx the parse tree
+	 */
+	void enterBinaryCombineRp(XPathGrammarParser.BinaryCombineRpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code BinaryCombineRp}
+	 * labeled alternative in {@link XPathGrammarParser#rp}.
+	 * @param ctx the parse tree
+	 */
+	void exitBinaryCombineRp(XPathGrammarParser.BinaryCombineRpContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code BinaryDslashRp}
 	 * labeled alternative in {@link XPathGrammarParser#rp}.
 	 * @param ctx the parse tree
@@ -68,18 +80,6 @@ public interface XPathGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSingleAttrRp(XPathGrammarParser.SingleAttrRpContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code BinaryRp}
-	 * labeled alternative in {@link XPathGrammarParser#rp}.
-	 * @param ctx the parse tree
-	 */
-	void enterBinaryRp(XPathGrammarParser.BinaryRpContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code BinaryRp}
-	 * labeled alternative in {@link XPathGrammarParser#rp}.
-	 * @param ctx the parse tree
-	 */
-	void exitBinaryRp(XPathGrammarParser.BinaryRpContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code SingleTextRp}
 	 * labeled alternative in {@link XPathGrammarParser#rp}.

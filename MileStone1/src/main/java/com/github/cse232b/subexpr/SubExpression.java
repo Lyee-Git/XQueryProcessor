@@ -39,7 +39,7 @@ public interface SubExpression {
         SingleParenthRp,
         BinarySlashRp,
         BinaryDslashRp,
-        BinaryRp,
+        BinaryCombineRp,
         FilterRp,
         RpF,
         BinaryEqualRpF,

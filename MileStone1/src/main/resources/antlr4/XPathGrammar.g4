@@ -15,7 +15,7 @@ rp
     	| '(' rp ')' #SingleParenthRp
     	| rp '/' rp #BinarySlashRp
     	| rp '//' rp #BinaryDslashRp
-    	| rp ',' rp # BinaryRp
+    	| rp ',' rp # BinaryCombineRp
     	| rp '[' f ']'#FilterRp
     	;
 

@@ -1,6 +1,8 @@
 // Generated from D:/qq/1359641035/FileRecv/Winter 2024/CSE 232B/XQueryProcessor/MileStone1/src/main/resources/antlr4/XPathGrammar.g4 by ANTLR 4.13.1
 package com.github.cse232b.parsers;
 
+import antlr4.XPathGrammarListener;
+import antlr4.XPathGrammarParser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -53,6 +55,18 @@ public class XPathGrammarBaseListener implements XPathGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBinaryCombineRp(XPathGrammarParser.BinaryCombineRpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBinaryCombineRp(XPathGrammarParser.BinaryCombineRpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBinaryDslashRp(XPathGrammarParser.BinaryDslashRpContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -72,18 +86,6 @@ public class XPathGrammarBaseListener implements XPathGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSingleAttrRp(XPathGrammarParser.SingleAttrRpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterBinaryRp(XPathGrammarParser.BinaryRpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBinaryRp(XPathGrammarParser.BinaryRpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
