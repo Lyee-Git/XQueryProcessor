@@ -41,9 +41,9 @@ public class BinaryRp implements SubExpression {
     public List<Node> eval(List<Node> input) throws Exception {
         List<Node> leftRes = leftExpression.eval(input);
         switch (this.subType) {
-            case SlashAp:
+            case BinarySlashRp:
                 return new ArrayList<>(new HashSet<>(rightExpression.eval(leftRes)));
-            case DslashAp:
+            case BinaryDslashRp:
                 List<Node> descendentsOutput = new ArrayList<>();
                 getDescendants(leftRes, descendentsOutput);
                 return new ArrayList<>(new HashSet<>(rightExpression.eval(descendentsOutput)));
