@@ -32,6 +32,13 @@ public interface XPathGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSingleParentRp(XPathGrammarParser.SingleParentRpContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code BinaryCombineRp}
+	 * labeled alternative in {@link XPathGrammarParser#rp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinaryCombineRp(XPathGrammarParser.BinaryCombineRpContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code BinaryDslashRp}
 	 * labeled alternative in {@link XPathGrammarParser#rp}.
 	 * @param ctx the parse tree
@@ -45,13 +52,6 @@ public interface XPathGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSingleAttrRp(XPathGrammarParser.SingleAttrRpContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code BinaryRp}
-	 * labeled alternative in {@link XPathGrammarParser#rp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBinaryRp(XPathGrammarParser.BinaryRpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code SingleTextRp}
 	 * labeled alternative in {@link XPathGrammarParser#rp}.

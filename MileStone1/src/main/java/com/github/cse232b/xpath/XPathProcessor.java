@@ -9,6 +9,7 @@ import com.github.cse232b.parsers.XPathGrammarLexer;
 import com.github.cse232b.parsers.XPathGrammarParser;
 import com.github.cse232b.subexpr.ApPath;
 import com.github.cse232b.subexpr.SubExpression;
+import com.github.cse232b.subexpr.ApPath;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;

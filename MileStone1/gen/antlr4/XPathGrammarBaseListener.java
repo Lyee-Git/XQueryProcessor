@@ -53,6 +53,18 @@ public class XPathGrammarBaseListener implements XPathGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBinaryCombineRp(XPathGrammarParser.BinaryCombineRpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBinaryCombineRp(XPathGrammarParser.BinaryCombineRpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBinaryDslashRp(XPathGrammarParser.BinaryDslashRpContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -72,18 +84,6 @@ public class XPathGrammarBaseListener implements XPathGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSingleAttrRp(XPathGrammarParser.SingleAttrRpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterBinaryRp(XPathGrammarParser.BinaryRpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBinaryRp(XPathGrammarParser.BinaryRpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
