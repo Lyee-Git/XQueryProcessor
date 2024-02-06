@@ -1,7 +1,7 @@
 package com.github.cse232b.xpath;
 
-import com.github.cse232b.parsers.XPathGrammarBaseVisitor;
-import com.github.cse232b.parsers.XPathGrammarParser;
+import com.github.cse232b.gen.XPathGrammarBaseVisitor;
+import com.github.cse232b.gen.XPathGrammarParser;
 import com.github.cse232b.subexpr.*;
 
 import static com.github.cse232b.subexpr.SubExpression.SubType.*;

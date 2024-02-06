@@ -38,7 +38,7 @@
                 </executions>
                 <configuration>
                     <sourceDirectory>${basedir}/src/main/resources/antlr4</sourceDirectory>
-                    <outputDirectory>src/main/java/com/github/cse232b/parsers</outputDirectory>
+                    <outputDirectory>src/main/java/com/github/cse232b/gen</outputDirectory>
                     <visitor>true</visitor>
                 </configuration>
             </plugin>
