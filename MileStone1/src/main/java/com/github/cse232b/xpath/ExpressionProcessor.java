@@ -17,7 +17,7 @@ public class ExpressionProcessor extends XPathGrammarBaseVisitor<SubExpression> 
 
     @Override
     public SubExpression visitSingleParentRp(XPathGrammarParser.SingleParentRpContext ctx) {
-        return super.visitSingleParentRp(ctx);
+        return new SingleRp(null, null, SubExpression.SubType.SingleParentRp);
     }
 
     @Override
@@ -32,17 +32,17 @@ public class ExpressionProcessor extends XPathGrammarBaseVisitor<SubExpression> 
 
     @Override
     public SubExpression visitSingleAttrRp(XPathGrammarParser.SingleAttrRpContext ctx) {
-        return super.visitSingleAttrRp(ctx);
+        return new SingleRp(ctx.Name().getText(), null, SubExpression.SubType.SingleAttrRp);
     }
 
     @Override
     public SubExpression visitSingleTextRp(XPathGrammarParser.SingleTextRpContext ctx) {
-        return super.visitSingleTextRp(ctx);
+        return new SingleRp(null, null, SubExpression.SubType.SingleTextRp);
     }
 
     @Override
     public SubExpression visitSingleSelfRp(XPathGrammarParser.SingleSelfRpContext ctx) {
-        return super.visitSingleSelfRp(ctx);
+        return new SingleRp(null, null, SubExpression.SubType.SingleSelfRp);
     }
 
     @Override
@@ -57,17 +57,18 @@ public class ExpressionProcessor extends XPathGrammarBaseVisitor<SubExpression> 
 
     @Override
     public SubExpression visitSingleParenthRp(XPathGrammarParser.SingleParenthRpContext ctx) {
-        return super.visitSingleParenthRp(ctx);
+        SubExpression parenthRp = visit(ctx.rp());
+        return new SingleRp(null, parenthRp, SubExpression.SubType.SingleParenthRp);
     }
 
     @Override
     public SubExpression visitSingleStarRp(XPathGrammarParser.SingleStarRpContext ctx) {
-        return super.visitSingleStarRp(ctx);
+        return new SingleRp(null, null, SubExpression.SubType.SingleStarRp);
     }
 
     @Override
     public SubExpression visitSingleTagRp(XPathGrammarParser.SingleTagRpContext ctx) {
-        return super.visitSingleTagRp(ctx);
+        return new SingleRp(ctx.Name().getText(), null, SubExpression.SubType.SingleTagRp);
     }
 
     @Override
@@ -77,12 +78,15 @@ public class ExpressionProcessor extends XPathGrammarBaseVisitor<SubExpression> 
 
     @Override
     public SubExpression visitRpEqualStringF(XPathGrammarParser.RpEqualStringFContext ctx) {
-        return super.visitRpEqualStringF(ctx);
+        SubExpression rp = visit(ctx.rp());
+        String s = ctx.String().getText();
+        return new StringF(SubExpression.SubType.RpEqualStringF, rp, s);
     }
 
     @Override
     public SubExpression visitNegF(XPathGrammarParser.NegFContext ctx) {
-        return super.visitNegF(ctx);
+        SubExpression f = visit(ctx.f());
+        return new SingleF(SubExpression.SubType.NegF, f);
     }
 
     @Override
@@ -97,12 +101,14 @@ public class ExpressionProcessor extends XPathGrammarBaseVisitor<SubExpression> 
 
     @Override
     public SubExpression visitRpF(XPathGrammarParser.RpFContext ctx) {
-        return super.visitRpF(ctx);
+        SubExpression rp = visit(ctx.rp());
+        return new SingleF(SubExpression.SubType.RpF, rp);
     }
 
     @Override
     public SubExpression visitParenthF(XPathGrammarParser.ParenthFContext ctx) {
-        return super.visitParenthF(ctx);
+        SubExpression f = visit(ctx.f());
+        return new SingleF(SubExpression.SubType.ParenthF, f);
     }
 
     @Override

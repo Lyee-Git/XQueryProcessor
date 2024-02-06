@@ -8,14 +8,14 @@ import java.util.Objects;
 
 public class StringF implements SubExpression {
     private final SubType subType;
-    private final SubExpression f;
+    private final SubExpression rp;
     private final String s;
 
-    public StringF(SubType subType, SubExpression f, String s) {
+    public StringF(SubType subType, SubExpression rp, String s) {
         if (subType == null) {
             throw new NullPointerException("subType in StringF missing " + this);
         }
-        if (f == null) {
+        if (rp == null) {
             throw new NullPointerException("f in StringF missing " + this);
         }
         if (s == null) {
@@ -23,7 +23,7 @@ public class StringF implements SubExpression {
         }
         this.subType = subType;
         assert(this.subType == SubType.RpEqualStringF);
-        this.f = f;
+        this.rp = rp;
         this.s = s;
     }
 
@@ -32,19 +32,19 @@ public class StringF implements SubExpression {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StringF stringF = (StringF) o;
-        return subType == stringF.subType && f.equals(stringF.f) && s.equals(stringF.s);
+        return subType == stringF.subType && rp.equals(stringF.rp) && s.equals(stringF.s);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(subType, f, s);
+        return Objects.hash(subType, rp, s);
     }
 
     @Override
     public String toString() {
         return "StringFt{" +
                 "subType=" + subType +
-                ", f=" + f +
+                ", f=" + rp +
                 ", s='" + s + '\'' +
                 '}';
     }
@@ -58,7 +58,7 @@ public class StringF implements SubExpression {
     public List<Node> eval(List<Node> input) throws Exception {
         List<Node> res = new ArrayList<>();
         for (Node node : input) {
-            List<Node> evalResult = this.f.eval(List.of(node));
+            List<Node> evalResult = this.rp.eval(List.of(node));
             for (Node n : evalResult) {
                 if (n.getNodeValue().equals(this.s)) {
                     res.add(n);
