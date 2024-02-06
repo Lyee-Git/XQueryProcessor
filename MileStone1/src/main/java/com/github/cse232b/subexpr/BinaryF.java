@@ -132,6 +132,7 @@ public class BinaryF implements SubExpression {
                         }
                     }
                 }
+                break;
             default:
                 throw new Exception("Evaluation error in " + this.subType);
         }

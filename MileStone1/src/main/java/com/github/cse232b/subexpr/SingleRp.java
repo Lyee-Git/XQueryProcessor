@@ -62,14 +62,14 @@ public class SingleRp implements SubExpression {
                     for (int i = 0; i < children.getLength(); i++) {
                         Node cur = children.item(i);
                         if (cur.getNodeType() == Node.ELEMENT_NODE && cur.getNodeName().equals(info)) {
-                            res.add(node);
+                            res.add(cur);
                         }
                     }
                     break;
                 case SingleStarRp:
                     for (int i = 0; i < children.getLength(); i++) {
                         Node cur = children.item(i);
-                        res.add(node);
+                        res.add(cur);
                     }
                     break;
                 case SingleSelfRp:
@@ -79,7 +79,7 @@ public class SingleRp implements SubExpression {
                     for (int i = 0; i < children.getLength(); i++) {
                         Node cur = children.item(i);
                         if (cur.getNodeType() == Node.TEXT_NODE) {
-                            res.add(node);
+                            res.add(cur);
                         }
                     }
                     break;

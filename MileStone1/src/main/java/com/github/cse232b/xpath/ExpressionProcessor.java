@@ -1,8 +1,8 @@
 package com.github.cse232b.xpath;
 
 import com.github.cse232b.parsers.XPathGrammarBaseVisitor;
-import com.github.cse232b.subexpr.*;
 import com.github.cse232b.parsers.XPathGrammarParser;
+import com.github.cse232b.subexpr.*;
 
 import static com.github.cse232b.subexpr.SubExpression.SubType.*;
 
@@ -96,6 +96,7 @@ public class ExpressionProcessor extends XPathGrammarBaseVisitor<SubExpression> 
     public SubExpression visitRpEqualStringF(XPathGrammarParser.RpEqualStringFContext ctx) {
         SubExpression rp = visit(ctx.rp());
         String s = ctx.String().getText();
+        s = s.substring(1, s.length() - 1);
         return new BinaryF(rp, s, RpEqualStringF);
     }
 
