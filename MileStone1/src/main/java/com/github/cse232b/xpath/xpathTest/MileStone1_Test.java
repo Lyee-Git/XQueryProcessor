@@ -13,11 +13,11 @@ public class MileStone1_Test {
         XPathProcessor xPathProcessor = new XPathProcessor();
         List<String> queries = new ArrayList<>();
         List<Node> res;
-//        queries.add("doc(\"j_caesar.xml\")//PERSONA");
-//       queries.add("doc(\"j_caesar.xml\")//SCENE[SPEECH/SPEAKER/text()=\"CAESAR\"]");
-//        queries.add("doc(\"j_caesar.xml\")//ACT[SCENE[SPEECH/SPEAKER/text()=\"CAESAR\" and SPEECH/SPEAKER/text()=\"BRUTUS\"]]");
-//       queries.add("doc(\"j_caesar.xml\")//ACT[SCENE[SPEECH/SPEAKER/text()=\"CAESAR\"] [SPEECH/SPEAKER/text()=\"BRUTUS\"]]");
-        queries.add("doc(\"j_caesar.xml\")//ACT[not .//SPEAKER/text()=\"CAESAR\"]");
+        queries.add("doc(\"j_caesar.xml\")//PERSONA");
+        queries.add("doc(\"j_caesar.xml\")//SCENE[SPEECH/SPEAKER/text()=\"CAESAR\"]");
+        queries.add("doc(\"j_caesar.xml\")//ACT[SCENE[SPEECH/SPEAKER/text()=\"CAESAR\" and SPEECH/SPEAKER/text()=\"BRUTUS\"]]");
+//        queries.add("doc(\"j_caesar.xml\")//ACT[SCENE[SPEECH/SPEAKER/text()=\"CAESAR\"] [SPEECH/SPEAKER/text()=\"BRUTUS\"]]");
+//        queries.add("doc(\"j_caesar.xml\")//ACT[not .//SPEAKER/text()=\"CAESAR\"]");
         for (int i = 0; i < queries.size(); i++) {
             System.out.println("Testcase " + i + " starts:");
             String q = queries.get(i);
