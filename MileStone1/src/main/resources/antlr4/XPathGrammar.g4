@@ -33,6 +33,6 @@ f
 doc
 	:'doc' '(' String ')';
 
-Name: [a-zA-Z0-9-]+;
+Name : [a-zA-Z_][a-zA-Z0-9_.-]*;
 String: '"' (~'"')* '"';
 WhiteSpace: [ \n\t\r]+ -> skip;

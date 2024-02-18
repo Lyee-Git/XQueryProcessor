@@ -3,6 +3,9 @@ src/main/java/com/github/cse232b/gen/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+output
+.idea
+../.idea
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
