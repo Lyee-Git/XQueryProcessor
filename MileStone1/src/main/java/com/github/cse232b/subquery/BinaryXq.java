@@ -3,6 +3,7 @@ package com.github.cse232b.subquery;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,7 +23,7 @@ public class BinaryXq implements SubQuery{
     // just combine results from both Xqueries
     @Override
     public List<Node> evaluate(Document doc) throws Exception {
-        List<Node> res = this.xq1.evaluate(doc);
+        List<Node> res = new ArrayList<>(this.xq1.evaluate(doc));
         res.addAll(this.xq2.evaluate(doc));
         return res;
     }
