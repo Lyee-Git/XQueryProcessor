@@ -1,16 +1,16 @@
 package com.github.cse232b.xquery;
 
 import com.github.cse232b.gen.*;
-import com.github.cse232b.subquery.BinaryCond;
-import com.github.cse232b.subquery.SatCond;
-import com.github.cse232b.subquery.SingleCond;
-import com.github.cse232b.subquery.SubQuery;
+import com.github.cse232b.subexpr.SubExpression;
+import com.github.cse232b.subquery.*;
 import com.github.cse232b.xpath.ExpressionProcessor;
 import com.github.cse232b.xpath.XPathProcessor;
+import com.sun.jdi.ArrayReference;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+import javax.management.Query;
 import java.util.*;
 
 
@@ -33,52 +33,105 @@ public class QueryProcessor extends XQueryGrammarBaseVisitor<SubQuery>{
 
     @Override
     public SubQuery visitStringXq(XQueryGrammarParser.StringXqContext ctx) {
-        return super.visitStringXq(ctx);
+        String trimmed = ctx.String().getText();
+        trimmed = trimmed.substring(1, trimmed.length() - 1);
+        return new StringXq(trimmed);
     }
 
     @Override
     public SubQuery visitApXq(XQueryGrammarParser.ApXqContext ctx) {
-        return super.visitApXq(ctx);
+        List<Node> list = new ArrayList<>();
+        try {
+            list = this.xPathProcessor.evaluate(ctx.ap().getText());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ApXq(list);
     }
 
     @Override
     public SubQuery visitBinarySlashXq(XQueryGrammarParser.BinarySlashXqContext ctx) {
-        return super.visitBinarySlashXq(ctx);
+        SubQuery xq = visit(ctx.xq());
+        String rpText = ctx.rp().getText();
+        SubExpression rp = this.exprProcessor.visit(xPathProcessor.createGrammarParser(rpText).rp());
+        return new BinaryRpXq(xq, rp, SubQuery.QueryType.BinarySlashXq);
     }
 
     @Override
     public SubQuery visitVarXq(XQueryGrammarParser.VarXqContext ctx) {
-        return super.visitVarXq(ctx);
+        return new VarXq(ctxMap.get(ctx.VAR().getText()));
     }
 
     @Override
     public SubQuery visitLetXq(XQueryGrammarParser.LetXqContext ctx) {
-        return super.visitLetXq(ctx);
+        letBind(ctx.let().VAR(), ctx.let().xq());
+        SubQuery xq = visit(ctx.xq());
+        letUnbind(ctx.let().VAR().size());
+        return xq;
     }
 
     @Override
     public SubQuery visitBinaryDslashXq(XQueryGrammarParser.BinaryDslashXqContext ctx) {
-        return super.visitBinaryDslashXq(ctx);
+        SubQuery xq = visit(ctx.xq());
+        String rpText = ctx.rp().getText();
+        SubExpression rp = this.exprProcessor.visit(xPathProcessor.createGrammarParser(rpText).rp());
+        return new BinaryRpXq(xq, rp, SubQuery.QueryType.BinaryDslashXq);
     }
 
     @Override
     public SubQuery visitBinaryCombineXq(XQueryGrammarParser.BinaryCombineXqContext ctx) {
-        return super.visitBinaryCombineXq(ctx);
+        SubQuery xq1 = visit(ctx.xq(0));
+        SubQuery xq2 = visit(ctx.xq(1));
+        return new BinaryXq(xq1, xq2);
+    }
+
+    // Find result Nodes of forXq recursively (backtracking)
+    private void forXqHandler(int idx, int size, XQueryGrammarParser.ForXqContext ctx, List<Node> res) throws Exception {
+        if (idx == size) {
+            if (ctx.let() != null) {
+                letBind(ctx.let().VAR(), ctx.let().xq());
+            }
+            if (ctx.where() != null && visit(ctx.where().cond()).evaluate(this.doc) != null || ctx.where() == null) {
+                res.addAll(visit(ctx.return_().xq()).evaluate(this.doc));
+            }
+            if (ctx.let() != null) {
+                letUnbind(ctx.let().VAR().size());
+            }
+            return;
+        }
+        List<Node> xqResNodes = visit(ctx.for_().xq(idx)).evaluate(this.doc);
+        String varName = ctx.for_().VAR(idx).getText();
+        for (Node node: xqResNodes) {
+            Map<String, List<Node>> oldMap = new HashMap<>(this.ctxMap);
+            ctxMap.put(varName, List.of(node));
+            ctxStack.push(oldMap);
+            forXqHandler(idx + 1, size, ctx, res);
+            ctxMap = ctxStack.pop();
+        }
     }
 
     @Override
     public SubQuery visitForXq(XQueryGrammarParser.ForXqContext ctx) {
-        return super.visitForXq(ctx);
+        List<Node> res = new ArrayList<>();
+        try {
+            forXqHandler(0, ctx.for_().VAR().size(), ctx, res);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new VarXq(res);
     }
 
     @Override
     public SubQuery visitTagXq(XQueryGrammarParser.TagXqContext ctx) {
-        return super.visitTagXq(ctx);
+        String tagName = ctx.Name(0).getText();
+        SubQuery xq = visit(ctx.xq());
+        return new TagXq(tagName, xq);
     }
 
     @Override
     public SubQuery visitParenthXq(XQueryGrammarParser.ParenthXqContext ctx) {
-        return super.visitParenthXq(ctx);
+        SubQuery xq = visit(ctx.xq());
+        return new ParenthXq(xq);
     }
 
     @Override

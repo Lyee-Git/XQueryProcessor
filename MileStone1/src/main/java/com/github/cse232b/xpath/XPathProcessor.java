@@ -29,6 +29,12 @@ public class XPathProcessor {
         this.docBuilder.setEntityResolver(new XMLResolver());
     }
 
+    public XPathGrammarParser createGrammarParser(String pathName) {
+        final XPathGrammarLexer lexer = new XPathGrammarLexer(CharStreams.fromString(pathName));
+        final CommonTokenStream tokens = new CommonTokenStream(lexer);
+        return new XPathGrammarParser(tokens);
+    }
+
     // Evaluates an XPath expression and returns the resulting nodes.
     public List<Node> evaluate(String path) throws Exception {
         // Lexer and parser setup
