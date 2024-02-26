@@ -7,8 +7,7 @@ output
 .idea
 ../.idea
 gen/
-src/main/resources/input/
-src/main/resources/output/
+
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
