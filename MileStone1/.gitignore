@@ -6,6 +6,9 @@ src/main/java/com/github/cse232b/gen/
 output
 .idea
 ../.idea
+gen/
+src/main/resources/input/
+src/main/resources/output/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
