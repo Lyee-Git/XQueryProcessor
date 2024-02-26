@@ -38,9 +38,6 @@ public class ResultTransformerQ {
         tf.setOutputProperty(OutputKeys.INDENT, "yes");
         tf.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
         OutputStreamWriter dos = null;
-        LocalDateTime timestamp = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedTimestamp = formatter.format(timestamp);
         File file = new File(outputPath);
         try {
             dos = new OutputStreamWriter(new FileOutputStream(file));
@@ -59,7 +56,8 @@ public class ResultTransformerQ {
             }
             else {
                 DOMSource source = new DOMSource(n);
-                StreamResult resultStream = new StreamResult(new PrintStream(System.out));
+//                StreamResult resultStream = new StreamResult(new PrintStream(System.out));
+                StreamResult resultStream = new StreamResult(dos);
                 tf.transform(source, resultStream);
             }
         }
