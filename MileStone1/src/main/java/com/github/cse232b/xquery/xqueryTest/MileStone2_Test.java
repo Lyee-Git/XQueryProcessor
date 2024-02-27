@@ -15,15 +15,13 @@ public class MileStone2_Test {
         List<Node> res;
         String outputPath = "MileStone1/src/main/resources/output";
 
-        query = """
-                <acts> { for $a in doc("j_caesar.xml")//ACT
-                 where not empty ( for $sp in $a/SCENE/SPEECH
-                 where\s
-                ($sp/SPEAKER/text() = "FLAVIUS" and $sp/../TITLE/text()="SCENE I.  Rome. A street.") return\s
-                <speaker> {
-                 $sp/text() }
-                </speaker> ) return <act>{$a/TITLE/text()}</act> }</acts>
-                """;
+        query = "<acts>{\n" +
+                " for $a in doc(\"j_caesar.xml\")//ACT \n" +
+                " where not empty( \n" +
+                " for $sp in $a/SCENE/SPEECH  \n" +
+                " where ($sp/SPEAKER/text() = \"FLAVIUS\" and $sp/../TITLE/text()=\"SCENE I.  Rome. A street.\") \n" +
+                " return <speaker>{ $sp/text() }</speaker> ) \n" +
+                " return <act>{$a/TITLE/text()}</act> }</acts>";
         res = xq.evaluate(query);
 
         System.out.printf("total results: %d\n", res.size());

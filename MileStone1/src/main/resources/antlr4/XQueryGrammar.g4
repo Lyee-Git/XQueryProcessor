@@ -25,7 +25,7 @@ return : 'return' xq;
 cond
     : xq ('=' | 'eq') xq #BinaryEqualCond
     | xq ('==' | 'is') xq #BinaryIsCond
-    | 'empty (' xq ')' #EmpCond
+    | 'empty' '(' xq ')' #EmpCond
     | 'some' VAR 'in' xq (',' VAR 'in' xq)* 'satisfies' cond #SatCond
     | '(' cond ')' #ParenthCond
     | cond 'and' cond #AndCond
