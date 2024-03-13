@@ -38,13 +38,15 @@ public class Rewriter {
         for (int i = 0; i < forMapList.size(); i++) {
             joinConditions.add(new ArrayList<>());
         }
-        String[] whereClauses = ctx.where().cond().getText().split("and");
-        for (String whereClause : whereClauses) {
-            String[] vars = whereClause.split("=|eq");
-            String leftVar = vars[0].strip(), rightVar = vars[1].strip();
-            for (int i = 0; i < forMapList.size(); i++) {
-                if (forMapList.get(i).containsKey(leftVar) || forMapList.get(i).containsKey(rightVar)) {
-                    joinConditions.get(i).add(new Pair<>(leftVar, rightVar));
+        if (ctx.where() != null) {
+            String[] whereClauses = ctx.where().cond().getText().split("and");
+            for (String whereClause : whereClauses) {
+                String[] vars = whereClause.split("=|eq");
+                String leftVar = vars[0].strip(), rightVar = vars[1].strip();
+                for (int i = 0; i < forMapList.size(); i++) {
+                    if (forMapList.get(i).containsKey(leftVar) || forMapList.get(i).containsKey(rightVar)) {
+                        joinConditions.get(i).add(new Pair<>(leftVar, rightVar));
+                    }
                 }
             }
         }
@@ -154,7 +156,7 @@ public class Rewriter {
             String replacement = Matcher.quoteReplacement("$tuple/" + returnVar.substring(1) + "/*");
             returnClause = returnClause.replaceAll(regex, replacement);
         }
-        res.append("return\n");
+        res.append("return ");
         res.append(returnClause);
         return res.toString();
     }
