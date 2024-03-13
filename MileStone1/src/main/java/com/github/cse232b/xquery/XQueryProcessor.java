@@ -11,7 +11,6 @@ import org.w3c.dom.Node;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.util.List;
 
 public class XQueryProcessor {
@@ -22,10 +21,14 @@ public class XQueryProcessor {
         this.curDocument = documentBuilder.newDocument();
     }
 
-    public List<Node> evaluate(String path) throws Exception {
+    public XQueryGrammarParser getGrammarParser(String path) {
         final XQueryGrammarLexer lexer = new XQueryGrammarLexer(CharStreams.fromString(path));
         final CommonTokenStream tokens = new CommonTokenStream(lexer);
-        final XQueryGrammarParser parser = new XQueryGrammarParser(tokens);
+        return new XQueryGrammarParser(tokens);
+    }
+
+    public List<Node> evaluate(String path) throws Exception {
+        final XQueryGrammarParser parser = getGrammarParser(path);
         final ParserRuleContext tree = parser.xq();
         QueryProcessor qb = new QueryProcessor(this.curDocument);
         final SubQuery root = qb.visit(tree);
