@@ -17,7 +17,7 @@ public class MileStone2_Test {
 
         query = "<acts>{\n" +
                 " for $a in doc(\"j_caesar.xml\")//ACT \n" +
-                " where not empty( \n" +
+                " where not empty ( \n" +
                 " for $sp in $a/SCENE/SPEECH  \n" +
                 " where ($sp/SPEAKER/text() = \"FLAVIUS\" and $sp/../TITLE/text()=\"SCENE I.  Rome. A street.\") \n" +
                 " return <speaker>{ $sp/text() }</speaker> ) \n" +

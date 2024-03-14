@@ -31,6 +31,58 @@ public class QueryProcessor extends XQueryGrammarBaseVisitor<SubQuery>{
         this.ctxStack = new Stack<>();
     }
 
+    @Override public SubQuery visitJoinXq(XQueryGrammarParser.JoinXqContext ctx) { return visitChildren(ctx); }
+
+    @Override public SubQuery visitAttributeList(XQueryGrammarParser.AttributeListContext ctx) { return visitChildren(ctx); }
+
+    @Override public SubQuery visitSimpleJoin(XQueryGrammarParser.SimpleJoinContext ctx) {
+        SubQuery left = visit(ctx.xq(0));
+        SubQuery right = visit(ctx.xq(1));
+        List<String> leftAttList = new ArrayList<>();
+        int leftAttLen = ctx.attributeList(0).Name().size();
+        for (int i = 0; i < leftAttLen; i ++) {
+            leftAttList.add(ctx.attributeList(0).Name(i).getText());
+        }
+        int rightAttLen = ctx.attributeList(1).Name().size();
+        List<String> rightAttList = new ArrayList<>();
+        for (int i = 0; i < rightAttLen; i ++) {
+            rightAttList.add(ctx.attributeList(1).Name(i).getText());
+        }
+        return new JoinXq(left, right, leftAttList, rightAttList);
+    }
+
+    @Override public SubQuery visitLeftRecurJoin(XQueryGrammarParser.LeftRecurJoinContext ctx) {
+        SubQuery left = visit(ctx.joinOp());
+        SubQuery right = visit(ctx.xq());
+        List<String> leftAttList = new ArrayList<>();
+        int leftAttLen = ctx.attributeList(0).Name().size();
+        for (int i = 0; i < leftAttLen; i++) {
+            leftAttList.add(ctx.attributeList(0).Name(i).getText());
+        }
+        List<String> rightAttList = new ArrayList<>();
+        int rightAttLen = ctx.attributeList(1).Name().size();
+        for (int i = 0; i < rightAttLen; i++) {
+            rightAttList.add(ctx.attributeList(1).Name(i).getText());
+        }
+        return new JoinXq(left, right, leftAttList, rightAttList);
+    }
+
+    @Override public SubQuery visitRightRecurJoin(XQueryGrammarParser.RightRecurJoinContext ctx) {
+        SubQuery left = visit(ctx.xq());
+        SubQuery right = visit(ctx.joinOp());
+        List<String> leftAttList = new ArrayList<>();
+        int leftAttLen = ctx.attributeList(0).Name().size();
+        for (int i = 0; i < leftAttLen; i++) {
+            leftAttList.add(ctx.attributeList(0).Name(i).getText());
+        }
+        List<String> rightAttList = new ArrayList<>();
+        int rightAttLen = ctx.attributeList(1).Name().size();
+        for (int i = 0; i < rightAttLen; i++) {
+            rightAttList.add(ctx.attributeList(1).Name(i).getText());
+        }
+        return new JoinXq(left, right, leftAttList, rightAttList);
+    }
+
     @Override
     public SubQuery visitStringXq(XQueryGrammarParser.StringXqContext ctx) {
         String trimmed = ctx.String().getText();

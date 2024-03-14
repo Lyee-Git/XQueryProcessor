@@ -12,7 +12,14 @@ xq
     | '<' Name '>' '{' xq '}' '</' Name '>' #TagXq
     | for (let)? (where)? return #ForXq
     | let xq #LetXq
+    | joinOp #JoinXq
     ;
+
+attributeList: '[' (Name)* (',' (Name)*)* ']';
+
+joinOp: JOIN '(' xq ',' xq ',' attributeList ',' attributeList ')' #SimpleJoin
+     | JOIN '(' joinOp ',' xq ',' attributeList ',' attributeList ')' #LeftRecurJoin
+     | JOIN '(' xq ',' joinOp ',' attributeList ',' attributeList ')' #RightRecurJoin;
 
 for : 'for' VAR 'in' xq (',' VAR 'in' xq)*;
 
@@ -34,3 +41,4 @@ cond
     ;
 
 VAR: '$' Name;
+JOIN: [jJ][oO][iI][nN];

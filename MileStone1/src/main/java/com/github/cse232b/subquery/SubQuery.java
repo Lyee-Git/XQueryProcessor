@@ -49,6 +49,7 @@ public interface SubQuery {
         TagXq,
         ForXq,
         LetXq,
+        JoinXq,
         BinaryEqualCond,
         BinaryIsCond,
         EmpCond,
