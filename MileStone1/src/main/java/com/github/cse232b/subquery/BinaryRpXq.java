@@ -34,7 +34,7 @@ public class BinaryRpXq implements SubQuery{
         } else if (this.queryType == QueryType.BinaryDslashXq) {
             List<Node> descentNodes = new ArrayList<>();
             getAllDescentNodes(res, descentNodes);
-            return new ArrayList<>(new HashSet<>(descentNodes));
+            return new ArrayList<>(new HashSet<>(this.rp.eval(descentNodes)));
         } else {
             throw new Exception("Unsupported queryType" + this);
         }

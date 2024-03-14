@@ -2,6 +2,7 @@ package com.github.cse232b.xquery.xqueryTest;
 
 import com.github.cse232b.gen.XQueryGrammarParser;
 import com.github.cse232b.subquery.Rewriter;
+import com.github.cse232b.xquery.ResultTransformerQ;
 import com.github.cse232b.xquery.XQueryProcessor;
 import org.w3c.dom.Node;
 
@@ -53,35 +54,35 @@ public class MileStone3_Rewriter_Test {
                 "    $a4 in $d4/a5/text()\n" +
                 "where $a1 eq $a2 and $a3 eq $a4 and $a1 eq $a3\n" +
                 "return <d>{<id1>{$id1}</id1>,<id2>{$id2}</id2>,<id3>{$id3}</id3>,<id4>{$id4}</id4>}</d>\n");
-        queries.add("for $b1 in doc(\"input\")/book,\n" +
-                "$aj in $b1/author/first/text(),\n" +
-                "$a1 in $b1/author,\n" +
-                "$af1 in $a1/first,\n" +
-                "$al1 in $a1/last,\n" +
-                "$b2 in doc(\"input\")/book,\n" +
-                "$a21 in $b2/author,\n" +
-                "$af21 in $a21/first,\n" +
-                "$al21 in $a21/last,\n" +
-                "$a22 in $b2/author,\n" +
-                "$af22 in $a22/first,\n" +
-                "$al22 in $a22/last,\n" +
-                "$b3 in doc(\"input\")/book,\n" +
-                "$a3 in $b3/author,\n" +
-                "$af3 in $a3/first,\n" +
-                "$al3 in $a3/last\n" +
-                "where $aj eq \"John\" and\n" +
-                "$af1 eq $af21 and $al1 eq $al21 and\n" +
-                "$af22 eq $af3 and $al22 eq $al3\n" +
-                "return <triplet> {$b1, $b2, $b3} </triplet>");
-        queries.add("for $b in doc(\"input\")/book,\n" +
-                "$a in doc(\"input\")/entry\n" +
-                "\n" +
-                "return\n" +
-                "<book-with-prices>\n" +
-                "{\n" +
-                "<price-review>{ $a/price }</price-review>,\n" +
-                "<price>{ $b/price }</price> }\n" +
-                "</book-with-prices>");
+//        queries.add("for $b1 in doc(\"input\")/book,\n" +
+//                "$aj in $b1/author/first/text(),\n" +
+//                "$a1 in $b1/author,\n" +
+//                "$af1 in $a1/first,\n" +
+//                "$al1 in $a1/last,\n" +
+//                "$b2 in doc(\"input\")/book,\n" +
+//                "$a21 in $b2/author,\n" +
+//                "$af21 in $a21/first,\n" +
+//                "$al21 in $a21/last,\n" +
+//                "$a22 in $b2/author,\n" +
+//                "$af22 in $a22/first,\n" +
+//                "$al22 in $a22/last,\n" +
+//                "$b3 in doc(\"input\")/book,\n" +
+//                "$a3 in $b3/author,\n" +
+//                "$af3 in $a3/first,\n" +
+//                "$al3 in $a3/last\n" +
+//                "where $aj eq \"John\" and\n" +
+//                "$af1 eq $af21 and $al1 eq $al21 and\n" +
+//                "$af22 eq $af3 and $al22 eq $al3\n" +
+//                "return <triplet> {$b1, $b2, $b3} </triplet>");
+//        queries.add("for $b in doc(\"input\")/book,\n" +
+//                "$a in doc(\"input\")/entry\n" +
+//                "\n" +
+//                "return\n" +
+//                "<book-with-prices>\n" +
+//                "{\n" +
+//                "<price-review>{ $a/price }</price-review>,\n" +
+//                "<price>{ $b/price }</price> }\n" +
+//                "</book-with-prices>");
         for (int i = 0; i < queries.size(); i++) {
             String query = queries.get(i);
             System.out.printf("Test case %d starts:\n", i + 1);
@@ -91,14 +92,16 @@ public class MileStone3_Rewriter_Test {
 //            System.out.printf("Execution time without Join: %d\n", t2 - t1);
             Rewriter rewriter = new Rewriter();
             String rewritten = rewriter.rewrite((XQueryGrammarParser.ForXqContext)xq.getGrammarParser(query).xq());
-            System.out.println("Query after rewriting:");
-            System.out.println(rewritten);
+//            System.out.println("Query after rewriting:");
+//            System.out.println(rewritten);
 
-// TODO: Test after Join implemented
-//        long t3 = System.currentTimeMillis();
-//        List<Node> resultJoin = xq.evaluate(rewritten);
-//        long t4 = System.currentTimeMillis();
-//        System.out.printf("Execution time with Join: %d\n", t4 - t3);
+ // TODO: Test after Join implemented
+        long t3 = System.currentTimeMillis();
+        List<Node> resultJoin = xq.evaluate(rewritten);
+        ResultTransformerQ transformerQ = new ResultTransformerQ();
+//      transformerQ.transform(resultJoin);
+        long t4 = System.currentTimeMillis();
+        System.out.printf("Execution time with Join: %d\n", t4 - t3);
         }
     }
 }
